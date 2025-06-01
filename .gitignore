@@ -1,0 +1,22 @@
+# Ignore Visual Studio temporary files
+.vs/
+*.user
+*.suo
+
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore logs
+*.log
+
+# Ignore database files
+*.mdf
+*.ldf
+
+# Ignore user-specific files
+*.dbmdl
+
+# Ignore Rider and VS Code settings
+.idea/
+.vscode/
