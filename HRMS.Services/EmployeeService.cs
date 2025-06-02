@@ -1,21 +1,56 @@
 ﻿using HRMS.Core.Entities;
 using HRMS.Core.Interfaces;
+using HRMS.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Services
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
-        private readonly IRepository<Employee> _employeeRepo;
+        private readonly HRMSDbContext _context;
 
-        public EmployeeService(IRepository<Employee> employeeRepo)
+        public EmployeeService(HRMSDbContext context)
         {
-            _employeeRepo = employeeRepo;
+            _context = context;
         }
 
-        public Task<IEnumerable<Employee>> GetAllEmployeesAsync() => _employeeRepo.GetAllAsync();
-        public Task AddEmployeeAsync(Employee emp) => _employeeRepo.AddAsync(emp);
-        public Task UpdateEmployeeAsync(Employee emp) => _employeeRepo.UpdateAsync(emp);
-        public Task<Employee> GetEmployeeByIdAsync(int id) => _employeeRepo.GetByIdAsync(id);
-        public Task DeleteEmployeeAsync(int id) => _employeeRepo.DeleteAsync(id);
+        public async Task<List<Employee>> GetAllAsync() =>
+            await _context.Employees.ToListAsync();
+
+        public async Task<Employee> GetByIdAsync(int id) =>
+            await _context.Employees.FindAsync(id);
+
+        public async Task<Employee> AddAsync(Employee employee)
+        {
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+            return employee;
+        }
+
+        public async Task<Employee> UpdateAsync(int id, Employee emp)
+        {
+            var existing = await _context.Employees.FindAsync(id);
+            if (existing == null) return null;
+
+            existing.FullName = emp.FullName;
+            existing.Email = emp.Email;
+            existing.Department = emp.Department;
+            existing.Position = emp.Position;
+            existing.JoinDate = emp.JoinDate;
+
+            await _context.SaveChangesAsync();
+            return existing;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var emp = await _context.Employees.FindAsync(id);
+            if (emp != null)
+            {
+                _context.Employees.Remove(emp);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
+
 }
