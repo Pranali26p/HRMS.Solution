@@ -13,6 +13,8 @@ namespace HRMS.Infrastructure.Data
         public DbSet<User> Users { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
+        public DbSet<Payroll> Payrolls { get; set; }
+        public DbSet<EmployeeSalaryConfig> SalaryConfigs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
