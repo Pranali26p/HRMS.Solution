@@ -1,6 +1,7 @@
 using System.Text;
 using HRMS.Core.Interfaces;
 using HRMS.Infrastructure.Data;
+using HRMS.Infrastructure.Services;
 using HRMS.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,7 @@ app.UseAuthorization();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ILeaveService, LeaveService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+builder.Services.AddScoped<IPayrollService, PayrollService>();
 
 // Register DbContext here
 builder.Services.AddDbContext<HRMSDbContext>(options =>

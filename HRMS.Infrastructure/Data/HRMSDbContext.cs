@@ -1,4 +1,5 @@
 ﻿using HRMS.Core.Entities;
+using HRMS.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Infrastructure.Data
@@ -15,6 +16,8 @@ namespace HRMS.Infrastructure.Data
         public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
         public DbSet<Payroll> Payrolls { get; set; }
         public DbSet<EmployeeSalaryConfig> SalaryConfigs { get; set; }
+        public DbSet<BonusDeduction> BonusDeductions { get; set; }
+        public DbSet<Appraisal> Appraisals { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
