@@ -41,6 +41,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<ILeaveService, LeaveService>();
 
 // Register DbContext here
 builder.Services.AddDbContext<HRMSDbContext>(options =>
