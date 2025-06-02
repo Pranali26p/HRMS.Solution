@@ -27,5 +27,6 @@ namespace HRMS.Core.Entities
         // ✅ ADD THIS: Bonus or Deduction amount (positive for bonus, negative for deduction)
         public decimal BonusOrDeduction { get; set; }
         public decimal BaseSalary { get; set; }
+        public DateTime PayDate { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using System.Text;
 using HRMS.Core.Interfaces;
+using HRMS.Core.Models;
 using HRMS.Infrastructure.Data;
 using HRMS.Infrastructure.Services;
 using HRMS.Services;
@@ -40,11 +41,12 @@ builder.Services.AddAuthentication(options =>
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ILeaveService, LeaveService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddScoped<IPayrollService, PayrollService>();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 // Register DbContext here
 builder.Services.AddDbContext<HRMSDbContext>(options =>

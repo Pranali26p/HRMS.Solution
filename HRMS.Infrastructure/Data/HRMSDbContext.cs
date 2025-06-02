@@ -18,7 +18,9 @@ namespace HRMS.Infrastructure.Data
         public DbSet<EmployeeSalaryConfig> SalaryConfigs { get; set; }
         public DbSet<BonusDeduction> BonusDeductions { get; set; }
         public DbSet<Appraisal> Appraisals { get; set; }
-
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectAssignment> ProjectAssignments { get; set; }
+        // ✅ Add these missing ones:
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
